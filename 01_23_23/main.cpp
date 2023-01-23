@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <algorithm>
 #include "clockType.h"
 
 
@@ -22,6 +23,11 @@ int main()
     std::cout << "Seconds: " << sec << std::endl;
     std::cout << "AM/PM: " << timeOfDayStr[t] << std::endl;
     clockType myClocks[10];
+    
+
+    std::string s = "HELLO";
+    std::transform(s.begin(), s.end(), s.begin(), ::tolower);
+    std::getline(std::cin >> std::ws, s);
 
     return 0;
 }
