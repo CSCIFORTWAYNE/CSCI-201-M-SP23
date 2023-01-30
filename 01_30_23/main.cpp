@@ -4,7 +4,10 @@
 #include <climits>
 #include "clockType.h"
 #include "clockExcept.h"
-
+//fill out the clockMinExcept and clockSecExcept classes 
+//add the new exceptions to the clockType
+//Change the main to catch the new exceptions.
+//Upload a zipped folder with all class pieces
 void resetStream();
 int inputInt(std::string);
 
@@ -25,7 +28,7 @@ int main()
         }
         catch (clockHrExcept e)
         {
-            
+
             std::cout << e.what() << " Enter a new value for the hour." << std::endl;
             hr = inputInt("Enter the hour on the clock: ");
             continue;
