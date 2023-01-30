@@ -25,6 +25,7 @@ int main()
         }
         catch (clockHrExcept e)
         {
+            
             std::cout << e.what() << " Enter a new value for the hour." << std::endl;
             hr = inputInt("Enter the hour on the clock: ");
             continue;
