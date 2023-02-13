@@ -19,6 +19,14 @@ int main()
     {
         std::cout << deck[i].toString() << std::endl;
     }
+    card c("heart", "ace");
+    std::cout << c.toString() << std::endl;
+
+    std::random_shuffle(deck.begin(), deck.end());
+    for (int i = 0; i < deck.size(); i++)
+    {
+        std::cout << deck[i].toString() << std::endl;
+    }
 
     return 0;
 }

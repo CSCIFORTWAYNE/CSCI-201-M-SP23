@@ -16,6 +16,10 @@ card::card(std::string s, std::string r)
     {
         throw std::invalid_argument(scpy + " is not a valid suit.");
     }
+    if (!strToRank.count(r))
+    {
+        throw std::invalid_argument(rcpy + " is not a valid rank.");
+    }
     suit = strToSuit[s];
     rank = strToRank[r];
 }
@@ -49,7 +53,7 @@ std::map<suitType, std::string> card::suitToStr = {{HEART, "♥"},
                                                    {DIAMOND, "♦"},
                                                    {SPADE, "♠"},
                                                    {CLUB, "♣"}};
-std::map<rankType, std::string> card::rankToStr = {}; // fill in for lecture activity
+std::map<rankType, std::string> card::rankToStr = {}; // fill in for lecture activity // fill in for lecture activity
 std::set<suitType> card::suits = {HEART,
                                   DIAMOND,
                                   SPADE,
