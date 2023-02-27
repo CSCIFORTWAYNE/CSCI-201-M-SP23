@@ -156,8 +156,78 @@ bool clockType::operator<=(const clockType &rightOp) const
     return *this < rightOp || *this == rightOp;
 }
 
+clockType clockType::operator++()
+{
+    this->incrementSeconds();
+    return *this;
+}
+
+clockType clockType::operator++(int)
+{
+    clockType temp = *this;
+    this->incrementSeconds();
+    return temp;
+}
+
+clockType clockType::operator--()
+{
+    sec = sec - 1;
+    if (sec < 0)
+    {
+        sec = 59;
+        min = min - 1;
+        if (min < 0)
+        {
+            min = 59;
+            hr = hr - 1;
+            if (hr < 1)
+            {
+                hr = 12;
+            }
+            else if (hr == 11)
+            {
+                if (timeOfDay == AM)
+                {
+                    timeOfDay = PM;
+                }
+                else
+                {
+                    timeOfDay = AM;
+                }
+            }
+        }
+    }
+
+    return *this;
+}
+
+clockType clockType::operator--(int)
+{
+    clockType temp = *this;
+    this->operator--();
+    return temp;
+}
+
 // friend function
 clockType &operator+(int secToAdd, clockType &rightOp)
 {
     return rightOp + secToAdd;
+}
+
+// friend function
+std::ostream &operator<<(std::ostream &out, const clockType &c)
+{
+    out << std::setfill('0') << std::right;
+    out << std::setw(2) << c.hr << ":" << std::setw(2) << c.min << ":" << std::setw(2) << c.sec << " " << timeOfDayStr[c.timeOfDay] << std::endl;
+    out << std::setfill(' ');
+    // out.unsetf(std::right);
+    return out;
+}
+
+std::istream &operator>>(std::istream &in, clockType &c)
+{
+    int hr, min, sec;
+    in >> hr >> min >> sec;
+    c.setTime(hr, min, sec, AM);
+    return in;
 }

@@ -1,6 +1,7 @@
 #ifndef CLOCK_H
 #define CLOCK_H
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <stdexcept>
 #include <cmath>
@@ -32,7 +33,13 @@ public:
     bool operator<(const clockType &rightOp) const;
     bool operator<=(const clockType &rightOp) const;
     // add operator overloads for > and >=
+    clockType operator++();
+    clockType operator++(int);
+    clockType operator--();
+    clockType operator--(int);
     friend clockType &operator+(int secToAdd, clockType &rightOp); // allows for int + clock
+    friend std::ostream &operator<<(std::ostream &, const clockType &);
+    friend std::istream &operator>>(std::istream &, clockType &);
 
 private:
     int hr;
