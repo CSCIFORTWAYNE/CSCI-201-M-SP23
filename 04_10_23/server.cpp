@@ -46,6 +46,7 @@ int main(int argc, char *argv[])
 
 std::string processString(std::string inStr)
 {
+    // LA: add 3 more request/response pairings
     std::map<std::string, std::string> strMap = {{"hello world", "Goodbye"},
                                                  {"how are you?", "OK"},
                                                  {"is the weather nice today?", "Yes"},
