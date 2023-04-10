@@ -1,25 +1,37 @@
 #include "PracticalSocket.h"
 #include <iostream>
+#include <string>
 
 int main(int argc, char *argv[])
 {
-    if (argc != 3)
+    if (argc != 2)
     {
-        std::cerr << "Usage: ./client <server host> <starting value>" << std::endl;
+        std::cerr << "Usage: ./client <server host>" << std::endl;
         return 1;
     }
 
     try
     {
-        std::cout << argv[1] << std::endl;
+        std::string echoString;
+        std::cout << "Enter a message for the server: ";
+        std::getline(std::cin >> std::ws, echoString);
+        std::cout << std::endl;
+
         TCPSocket sock(argv[1], 9431);
-        uint32_t val = atoi(argv[2]);
-        val = ntohl(val);
+
+        uint32_t val = htonl(echoString.length());
         sock.send(&val, sizeof(val));
+        sock.send(echoString.c_str(), echoString.length());
         if (sock.recvFully(&val, sizeof(val)) == sizeof(val))
         {
             val = ntohl(val);
-            std::cout << "Server Response: " << val << std::endl;
+            char *buffer = new char[val + 1];
+            if (sock.recvFully(buffer, val) == val)
+            {
+                buffer[val] = '\0';
+                std::cout << "Server Response: " << buffer << std::endl;
+            }
+            delete[] buffer;
         }
     }
     catch (SocketException &e)

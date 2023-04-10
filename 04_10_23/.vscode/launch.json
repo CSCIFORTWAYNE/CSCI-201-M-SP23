@@ -6,8 +6,7 @@
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
             "args": [
-                "127.0.0.1",
-                "10"
+                "127.0.0.1"
             ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
